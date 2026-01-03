@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  restservice:
+    build: .
+    image: restservice:latest
+    container_name: restservice
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
