@@ -1,4 +1,4 @@
-package url.com.br.colaborador;
+?package url.com.br.terreno;
 
 import java.util.List;
 
@@ -16,31 +16,31 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/colaboradores")
-@Tag(name = "Colaboradores")
-public class ColaboradorController {
+@RequestMapping("/terrenos")
+@Tag(name = "Terrenos")
+public class TerrenoController {
     @Autowired
-    private ColaboradorService service;
+    private TerrenoService service;
 
     @GetMapping
-    public List<Colaborador> listar() {
+    public List<Terreno> listar() {
         return service.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Colaborador> buscar(@PathVariable Long id) {
+    public ResponseEntity<Terreno> buscar(@PathVariable Long id) {
         return service.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Colaborador criar(@RequestBody Colaborador colaborador) {
-        return service.criar(colaborador);
+    public Terreno criar(@RequestBody Terreno terreno) {
+        return service.criar(terreno);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Colaborador> atualizar(@PathVariable Long id, @RequestBody Colaborador dados) {
+    public ResponseEntity<Terreno> atualizar(@PathVariable Long id, @RequestBody Terreno dados) {
         return service.atualizar(id, dados)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
