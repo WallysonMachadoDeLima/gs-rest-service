@@ -1,4 +1,4 @@
-package com.example.restservice;
+package url.com.br.colaborador;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

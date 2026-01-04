@@ -1,4 +1,4 @@
-package com.example.restservice;
+package url.com.br;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
