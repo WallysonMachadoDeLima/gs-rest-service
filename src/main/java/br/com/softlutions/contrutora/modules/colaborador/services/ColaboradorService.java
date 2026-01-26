@@ -32,6 +32,7 @@ public class ColaboradorService {
                 .map(c -> {
                     c.setNome(dados.getNome());
                     c.setEmail(dados.getEmail());
+                    c.setCpf(dados.getCpf());
                     c.setTelefone(dados.getTelefone());
                     c.setEndereco(dados.getEndereco());
                     c.setProfissao(dados.getProfissao());

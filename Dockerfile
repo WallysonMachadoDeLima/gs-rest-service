@@ -2,10 +2,8 @@
 FROM eclipse-temurin:21-jdk AS build
 WORKDIR /workspace/app
 COPY . .
-# Detect build tool and build accordingly
-RUN if [ -f mvnw ]; then ./mvnw clean package -DskipTests; \
-    elif [ -f gradlew ]; then ./gradlew build -x test; \
-    else echo "No supported build tool found" && exit 1; fi
+# Build always with Maven
+RUN ./mvnw clean package -DskipTests
 
 # ---- Run Stage ----
 FROM eclipse-temurin:21-jre
