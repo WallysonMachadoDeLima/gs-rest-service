@@ -60,12 +60,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Hibernate Tools para geração de DDL -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-tools</artifactId>
-      <version>5.6.15.Final</version>
-    </dependency>
   </dependencies>
 
   <build>
@@ -73,34 +67,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <!-- Plugin Hibernate para exportar DDL do schema -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.1.0</version>
-        <executions>
-          <execution>
-            <id>generate-ddl</id>
-            <phase>none</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>org.hibernate.tool.hbm2ddl.SchemaExport</mainClass>
-              <arguments>
-                <argument>--config=src/main/resources/application.properties</argument>
-                <argument>--output=db/migration/V1__baseline.sql</argument>
-                <argument>--format=true</argument>
-                <argument>--delimiter=;</argument>
-                <argument>--halt-on-error=true</argument>
-                <argument>--create</argument>
-              </arguments>
-              <classpathScope>compile</classpathScope>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
