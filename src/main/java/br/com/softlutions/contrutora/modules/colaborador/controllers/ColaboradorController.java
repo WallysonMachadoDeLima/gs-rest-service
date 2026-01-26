@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,26 +31,26 @@ public class ColaboradorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Colaborador> buscar(@PathVariable Long id) {
-        return service.findById(id)
+    public ResponseEntity<Colaborador> buscar(@PathVariable @NonNull Integer id) {
+        return service.findOne(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Colaborador criar(@RequestBody Colaborador colaborador) {
+    public Colaborador criar(@RequestBody @NonNull Colaborador colaborador) {
         return service.create(colaborador);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Colaborador> atualizar(@PathVariable Long id, @RequestBody Colaborador dados) {
+    public ResponseEntity<Colaborador> atualizar(@PathVariable @NonNull Integer id, @RequestBody @NonNull Colaborador dados) {
         return service.update(id, dados)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable @NonNull Integer id) {
         if (service.delete(id)) {
             return ResponseEntity.noContent().build();
         }

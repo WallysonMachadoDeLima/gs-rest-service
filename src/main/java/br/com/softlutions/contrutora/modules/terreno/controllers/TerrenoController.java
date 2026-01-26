@@ -26,31 +26,31 @@ public class TerrenoController {
 
     @GetMapping
     public List<Terreno> listar() {
-        return service.listarTodos();
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Terreno> buscar(@PathVariable Long id) {
-        return service.buscarPorId(id)
+    public ResponseEntity<Terreno> buscar(@PathVariable Integer id) {
+        return service.findOne(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Terreno criar(@RequestBody Terreno terreno) {
-        return service.criar(terreno);
+        return service.create(terreno);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Terreno> atualizar(@PathVariable Long id, @RequestBody Terreno dados) {
-        return service.atualizar(id, dados)
+    public ResponseEntity<Terreno> atualizar(@PathVariable Integer id, @RequestBody Terreno dados) {
+        return service.update(id, dados)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        if (service.deletar(id)) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        if (service.delete(id)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();

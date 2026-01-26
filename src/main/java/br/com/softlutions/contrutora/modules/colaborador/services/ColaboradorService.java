@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import br.com.softlutions.contrutora.modules.colaborador.entities.Colaborador;
@@ -18,15 +19,15 @@ public class ColaboradorService {
         return repository.findAll();
     }
 
-    public Optional<Colaborador> findById(Long id) {
+    public Optional<Colaborador> findOne(@NonNull Integer id) {
         return repository.findById(id);
     }
 
-    public Colaborador create(Colaborador colaborador) {
+    public Colaborador create(@NonNull Colaborador colaborador) {
         return repository.save(colaborador);
     }
 
-    public Optional<Colaborador> update(Long id, Colaborador dados) {
+    public Optional<Colaborador> update(@NonNull Integer id, @NonNull Colaborador dados) {
         return repository.findById(id)
                 .map(c -> {
                     c.setNome(dados.getNome());
@@ -38,7 +39,7 @@ public class ColaboradorService {
                 });
     }
 
-    public boolean delete(Long id) {
+    public boolean delete(@NonNull Integer id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
             return true;

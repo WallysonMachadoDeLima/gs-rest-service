@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import br.com.softlutions.contrutora.modules.obra.entities.Obra;
@@ -14,19 +15,19 @@ public class ObraService {
     @Autowired
     private ObraRepository repository;
 
-    public List<Obra> listarTodos() {
+    public List<Obra> findAll() {
         return repository.findAll();
     }
 
-    public Optional<Obra> buscarPorId(Long id) {
+    public Optional<Obra> findOne(@NonNull Integer id) {
         return repository.findById(id);
     }
 
-    public Obra criar(Obra obra) {
+    public Obra create(@NonNull Obra obra) {
         return repository.save(obra);
     }
 
-    public Optional<Obra> atualizar(Long id, Obra dados) {
+    public Optional<Obra> update(@NonNull Integer id, @NonNull Obra dados) {
         return repository.findById(id)
                 .map(o -> {
                     o.setTerrenoId(dados.getTerrenoId());
@@ -40,7 +41,7 @@ public class ObraService {
                 });
     }
 
-    public boolean deletar(Long id) {
+    public boolean delete(@NonNull Integer id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
             return true;

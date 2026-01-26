@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.softlutions.contrutora.modules.terreno.entities.Terreno;
 
-public interface TerrenoRepository extends JpaRepository<Terreno, Long> {
+public interface TerrenoRepository extends JpaRepository<Terreno, Integer> {
 }

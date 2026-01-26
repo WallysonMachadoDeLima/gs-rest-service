@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 public class Terreno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String nomeApelido;
     private String enderecoTexto;
@@ -21,8 +21,8 @@ public class Terreno {
     private Boolean ativo = true;
 
     // Getters e setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public String getNomeApelido() { return nomeApelido; }
     public void setNomeApelido(String nomeApelido) { this.nomeApelido = nomeApelido; }
