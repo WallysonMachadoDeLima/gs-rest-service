@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,26 +31,26 @@ public class TerrenoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Terreno> buscar(@PathVariable Integer id) {
+    public ResponseEntity<Terreno> buscar(@PathVariable @NonNull Integer id) {
         return service.findOne(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Terreno criar(@RequestBody Terreno terreno) {
+    public Terreno criar(@RequestBody @NonNull Terreno terreno) {
         return service.create(terreno);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Terreno> atualizar(@PathVariable Integer id, @RequestBody Terreno dados) {
+    public ResponseEntity<Terreno> atualizar(@PathVariable @NonNull Integer id, @RequestBody @NonNull Terreno dados) {
         return service.update(id, dados)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+    public ResponseEntity<Void> deletar(@PathVariable @NonNull Integer id) {
         if (service.delete(id)) {
             return ResponseEntity.noContent().build();
         }
