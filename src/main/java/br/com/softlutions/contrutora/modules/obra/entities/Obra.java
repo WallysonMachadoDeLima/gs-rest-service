@@ -2,9 +2,8 @@ package br.com.softlutions.contrutora.modules.obra.entities;
 
 import java.time.LocalDate;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +18,9 @@ public class Obra {
     private LocalDate dataInicio;
     private LocalDate dataFimPrevista;
        
-    @Enumerated(EnumType.STRING)
+    //@Convert(converter = StatusObraIdConverter.class) // autoApply já cobre
+    @jakarta.persistence.Column(name = "status_id")
+    @Schema(implementation = StatusObra.class)
     private StatusObra status;
     
     private String observacao;

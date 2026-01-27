@@ -13,11 +13,11 @@ logs:
 test:
 	docker-compose exec restservice ./mvnw test
 
-flyway-info:
+fw-info:
 	docker-compose exec restservice ./mvnw flyway:info
 
-flyway-migrate:
+fw-migrate:
 	docker-compose exec restservice ./mvnw flyway:migrate
 
-flyway-clean:
+fw-clean:
 	docker-compose exec restservice ./mvnw flyway:clean

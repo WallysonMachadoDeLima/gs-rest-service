@@ -1,8 +1,6 @@
 package br.com.softlutions.contrutora.modules.colaborador.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +17,8 @@ public class Colaborador {
     private String telefone;
     private String endereco;
 
-    @Enumerated(EnumType.STRING)
+    //@Convert(converter = ProfissaoIdConverter.class) // autoApply já cobre
+    @jakarta.persistence.Column(name = "profissao_id")
     private Profissao profissao;
 
     public Integer getId() { return id; }
