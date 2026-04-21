@@ -28,18 +28,20 @@ public enum TipoLancamento implements DbEnum<Integer> {
     public Integer getId() { return id; }
 
     @Override
-    @JsonValue
     public String getNome() { return nome; }
 
     @Override
     public boolean isDeprecated() { return deprecated; }
 
+    @JsonValue
+    public String toJson() { return name(); }
+
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static TipoLancamento fromNome(String nome) {
+    public static TipoLancamento fromJson(String value) {
         for (TipoLancamento t : values()) {
-            if (t.getNome().equalsIgnoreCase(nome)) return t;
+            if (t.name().equalsIgnoreCase(value) || t.getNome().equalsIgnoreCase(value)) return t;
         }
-        throw new IllegalArgumentException("TipoLancamento inválido: " + nome);
+        throw new IllegalArgumentException("TipoLancamento inválido: " + value);
     }
 
     public static TipoLancamento fromId(Integer id) {

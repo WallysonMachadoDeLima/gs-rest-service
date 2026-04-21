@@ -27,18 +27,20 @@ public enum TipoFornecedor implements DbEnum<Integer> {
     public Integer getId() { return id; }
 
     @Override
-    @JsonValue
     public String getNome() { return nome; }
 
     @Override
     public boolean isDeprecated() { return deprecated; }
 
+    @JsonValue
+    public String toJson() { return name(); }
+
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static TipoFornecedor fromNome(String nome) {
+    public static TipoFornecedor fromJson(String value) {
         for (TipoFornecedor t : values()) {
-            if (t.getNome().equalsIgnoreCase(nome)) return t;
+            if (t.name().equalsIgnoreCase(value) || t.getNome().equalsIgnoreCase(value)) return t;
         }
-        throw new IllegalArgumentException("TipoFornecedor inválido: " + nome);
+        throw new IllegalArgumentException("TipoFornecedor inválido: " + value);
     }
 
     public static TipoFornecedor fromId(Integer id) {

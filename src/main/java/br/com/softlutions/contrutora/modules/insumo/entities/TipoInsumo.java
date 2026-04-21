@@ -26,18 +26,20 @@ public enum TipoInsumo implements DbEnum<Integer> {
     public Integer getId() { return id; }
 
     @Override
-    @JsonValue
     public String getNome() { return nome; }
 
     @Override
     public boolean isDeprecated() { return deprecated; }
 
+    @JsonValue
+    public String toJson() { return name(); }
+
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static TipoInsumo fromNome(String nome) {
+    public static TipoInsumo fromJson(String value) {
         for (TipoInsumo t : values()) {
-            if (t.getNome().equalsIgnoreCase(nome)) return t;
+            if (t.name().equalsIgnoreCase(value) || t.getNome().equalsIgnoreCase(value)) return t;
         }
-        throw new IllegalArgumentException("TipoInsumo inválido: " + nome);
+        throw new IllegalArgumentException("TipoInsumo inválido: " + value);
     }
 
     public static TipoInsumo fromId(Integer id) {
