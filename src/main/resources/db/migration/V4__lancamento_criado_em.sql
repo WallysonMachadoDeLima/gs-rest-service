@@ -1,0 +1,2 @@
+ALTER TABLE obra_insumo_lancamento
+    ADD COLUMN IF NOT EXISTS criado_em TIMESTAMP NOT NULL DEFAULT NOW();

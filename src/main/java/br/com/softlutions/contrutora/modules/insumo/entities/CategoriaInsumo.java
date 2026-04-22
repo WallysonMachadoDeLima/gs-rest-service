@@ -35,8 +35,10 @@ public enum CategoriaInsumo implements DbEnum<Integer> {
     public Integer getId() { return id; }
 
     @Override
-    @JsonValue
     public String getNome() { return nome; }
+
+    @JsonValue
+    public String toJson() { return name(); }
 
     @Override
     public boolean isDeprecated() { return deprecated; }
@@ -44,7 +46,7 @@ public enum CategoriaInsumo implements DbEnum<Integer> {
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
     public static CategoriaInsumo fromNome(String nome) {
         for (CategoriaInsumo c : values()) {
-            if (c.getNome().equalsIgnoreCase(nome)) return c;
+            if (c.name().equalsIgnoreCase(nome) || c.getNome().equalsIgnoreCase(nome)) return c;
         }
         throw new IllegalArgumentException("CategoriaInsumo inválida: " + nome);
     }

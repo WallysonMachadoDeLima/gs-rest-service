@@ -1,13 +1,15 @@
 package br.com.softlutions.contrutora.modules.lancamento.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class ObraInsumoLancamento {
@@ -25,7 +27,16 @@ public class ObraInsumoLancamento {
     @Schema(implementation = TipoLancamento.class)
     private TipoLancamento tipoLancamento;
 
-    private LocalDate data;
+    private LocalDateTime data;
+
+    @Column(name = "criado_em", updatable = false)
+    private LocalDateTime criadoEm;
+
+    @PrePersist
+    protected void onCreate() {
+        if (criadoEm == null) criadoEm = LocalDateTime.now();
+    }
+
     private BigDecimal quantidade;
     private BigDecimal valorUnitario;
     private BigDecimal valorTotal;
@@ -53,8 +64,8 @@ public class ObraInsumoLancamento {
     public TipoLancamento getTipoLancamento() { return tipoLancamento; }
     public void setTipoLancamento(TipoLancamento tipoLancamento) { this.tipoLancamento = tipoLancamento; }
 
-    public LocalDate getData() { return data; }
-    public void setData(LocalDate data) { this.data = data; }
+    public LocalDateTime getData() { return data; }
+    public void setData(LocalDateTime data) { this.data = data; }
 
     public BigDecimal getQuantidade() { return quantidade; }
     public void setQuantidade(BigDecimal quantidade) { this.quantidade = quantidade; }
@@ -70,4 +81,7 @@ public class ObraInsumoLancamento {
 
     public Boolean getAtivo() { return ativo; }
     public void setAtivo(Boolean ativo) { this.ativo = ativo; }
+
+    public LocalDateTime getCriadoEm() { return criadoEm; }
+    public void setCriadoEm(LocalDateTime criadoEm) { this.criadoEm = criadoEm; }
 }
