@@ -1,5 +1,6 @@
 package br.com.softlutions.contrutora.modules.lancamento.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,19 @@ public class ObraInsumoLancamentoController {
     private ObraInsumoLancamentoService service;
 
     @GetMapping
-    public List<ObraInsumoLancamento> listar(@RequestParam(required = false) Integer obraId) {
-        if (obraId != null) {
-            return service.findByObra(obraId);
+    public List<ObraInsumoLancamento> listar(
+            @RequestParam(required = false) Integer obraId,
+            @RequestParam(required = false) Integer insumoId,
+            @RequestParam(required = false) String tipoLancamento,
+            @RequestParam(required = false) String dataInicio,
+            @RequestParam(required = false) String dataFim
+    ) {
+        if (obraId == null && insumoId == null && tipoLancamento == null && dataInicio == null && dataFim == null) {
+            return service.findAll();
         }
-        return service.findAll();
+        LocalDate dtInicio = dataInicio != null && !dataInicio.isBlank() ? LocalDate.parse(dataInicio) : null;
+        LocalDate dtFim = dataFim != null && !dataFim.isBlank() ? LocalDate.parse(dataFim) : null;
+        return service.findAllFiltered(obraId, insumoId, tipoLancamento, dtInicio, dtFim);
     }
 
     @GetMapping("/{id}")

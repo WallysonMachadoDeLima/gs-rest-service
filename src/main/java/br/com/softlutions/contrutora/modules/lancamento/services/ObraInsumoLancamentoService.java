@@ -1,5 +1,8 @@
 package br.com.softlutions.contrutora.modules.lancamento.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +11,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import br.com.softlutions.contrutora.modules.lancamento.entities.ObraInsumoLancamento;
+import br.com.softlutions.contrutora.modules.lancamento.entities.TipoLancamento;
 import br.com.softlutions.contrutora.modules.lancamento.repositories.ObraInsumoLancamentoRepository;
 
 @Service
@@ -25,6 +29,22 @@ public class ObraInsumoLancamentoService {
 
     public List<ObraInsumoLancamento> findByObra(@NonNull Integer obraId) {
         return repository.findByObraId(obraId);
+    }
+
+    public List<ObraInsumoLancamento> findAllFiltered(
+            Integer obraId,
+            Integer insumoId,
+            String tipoLancamento,
+            LocalDate dataInicio,
+            LocalDate dataFim
+    ) {
+        TipoLancamento tipo = null;
+        if (tipoLancamento != null && !tipoLancamento.isBlank()) {
+            tipo = TipoLancamento.valueOf(tipoLancamento);
+        }
+        LocalDateTime dtInicio = dataInicio != null ? dataInicio.atStartOfDay() : null;
+        LocalDateTime dtFim = dataFim != null ? dataFim.atTime(LocalTime.MAX) : null;
+        return repository.findAllFiltered(obraId, insumoId, tipo, dtInicio, dtFim);
     }
 
     public ObraInsumoLancamento create(@NonNull ObraInsumoLancamento lancamento) {

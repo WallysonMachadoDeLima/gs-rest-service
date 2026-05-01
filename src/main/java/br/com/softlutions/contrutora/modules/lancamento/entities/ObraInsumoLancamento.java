@@ -22,10 +22,15 @@ public class ObraInsumoLancamento {
     private Integer fornecedorId;
     private Integer prestadorColaboradorId;
     private Integer criadoPorColaboradorId;
+    private Integer notaEntradaId;
 
     @jakarta.persistence.Column(name = "tipo_lancamento_id")
     @Schema(implementation = TipoLancamento.class)
     private TipoLancamento tipoLancamento;
+
+    @jakarta.persistence.Column(name = "origem_compra")
+    @Schema(implementation = OrigemCompra.class)
+    private OrigemCompra origemCompra;
 
     private LocalDateTime data;
 
@@ -61,6 +66,9 @@ public class ObraInsumoLancamento {
     public Integer getCriadoPorColaboradorId() { return criadoPorColaboradorId; }
     public void setCriadoPorColaboradorId(Integer criadoPorColaboradorId) { this.criadoPorColaboradorId = criadoPorColaboradorId; }
 
+    public Integer getNotaEntradaId() { return notaEntradaId; }
+    public void setNotaEntradaId(Integer notaEntradaId) { this.notaEntradaId = notaEntradaId; }
+
     public TipoLancamento getTipoLancamento() { return tipoLancamento; }
     public void setTipoLancamento(TipoLancamento tipoLancamento) { this.tipoLancamento = tipoLancamento; }
 
@@ -84,4 +92,7 @@ public class ObraInsumoLancamento {
 
     public LocalDateTime getCriadoEm() { return criadoEm; }
     public void setCriadoEm(LocalDateTime criadoEm) { this.criadoEm = criadoEm; }
+
+    public OrigemCompra getOrigemCompra() { return origemCompra; }
+    public void setOrigemCompra(OrigemCompra origemCompra) { this.origemCompra = origemCompra; }
 }
